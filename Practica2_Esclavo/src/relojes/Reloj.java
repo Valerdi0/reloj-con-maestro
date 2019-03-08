@@ -12,7 +12,7 @@ public class Reloj extends javax.swing.JFrame{
     String Reloj1;
     Socket sk;
     int pto = 5000;
-    String ip = "192.168.1.66";
+    String ip = "192.168.42.92";
     RelojHilo contador;
       
        
@@ -29,6 +29,7 @@ public class Reloj extends javax.swing.JFrame{
             //teclado = new BufferedReader(new InputStreamReader(System.in));
             //String tec = teclado.readLine();
             salida = new PrintStream(sk.getOutputStream());
+	   while(true){
             salida.println("Hola");
 
             Reloj1 = entrada.readLine();
@@ -38,9 +39,10 @@ public class Reloj extends javax.swing.JFrame{
             contador.reloj1.setHora(Integer.parseInt(numeros[0]));
             contador.reloj1.setMinuto(Integer.parseInt(numeros[1]));
             contador.reloj1.setSegundo(Integer.parseInt(numeros[2]) + 1);
-            salida.close();
-            sk.close();
-            entrada.close();
+	   }
+            //salida.close();
+            //sk.close();
+            //entrada.close();
             
         }catch(Exception e){
             e.printStackTrace();
