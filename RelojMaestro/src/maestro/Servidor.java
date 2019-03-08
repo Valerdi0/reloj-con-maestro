@@ -29,19 +29,20 @@ public class Servidor {
                 cont++;
                 switch(cont){
                     case 1:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj1);
+                        System.out.println("Servidor e1:" + ventana.e1);
+                        t = new ThreadHandle(esclavo, ventana.LabelReloj1, ventana.e1);
                         break;
                     case 2:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj2);
+                        t = new ThreadHandle(esclavo, ventana.LabelReloj2, ventana.e2);
                         break;
                     case 3:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj3);
+                        t = new ThreadHandle(esclavo, ventana.LabelReloj3, ventana.e3);
                         break;
                     case 4:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj4);
+                        t = new ThreadHandle(esclavo, ventana.LabelReloj4,ventana.e4);
                         break;
                     default:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj1);
+                        t = new ThreadHandle(esclavo, ventana.LabelReloj1,ventana.e1);
                         break;
                 }
                 t.start();

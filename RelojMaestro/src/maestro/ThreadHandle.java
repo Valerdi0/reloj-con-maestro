@@ -13,10 +13,12 @@ import java.io.*;
 public class ThreadHandle extends Thread {
     Socket peticion;
     javax.swing.JLabel label;
+    boolean enviar;
     
-    public ThreadHandle(Socket peticion,javax.swing.JLabel label){
+    public ThreadHandle(Socket peticion,javax.swing.JLabel label, boolean enviar){
         this.peticion = peticion;
         this.label = label;
+        this.enviar = enviar;
     }
     
     @Override
@@ -29,15 +31,20 @@ public class ThreadHandle extends Thread {
             //Canales de entrada y salida de datos
             entrada = new BufferedReader(new InputStreamReader(peticion.getInputStream()));
             salida = new DataOutputStream(peticion.getOutputStream());
-
-            //Recepcion de mensaje
             mensajeRecibido = entrada.readLine();
-            //System.out.println(mensajeRecibido);
             salida.writeUTF(label.getText());
-            System.out.println("Cerrando conexión...");
-            entrada.close();
-            salida.close();
-            peticion.close();//Aqui se cierra la conexión con el cliente
+            while(this.enviar){
+            //Recepcion de mensaje
+                mensajeRecibido = entrada.readLine();
+            //System.out.println(mensajeRecibido);
+                System.out.println("entra");
+                salida.writeUTF(label.getText());
+                this.enviar = false;
+                //System.out.println("Cerrando conexión...");
+            //entrada.close();
+            //salida.close();
+            //peticion.close();//Aqui se cierra la conexión con el cliente
+            }
         }
         catch(Exception e){
             System.out.println(e.getMessage());

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import java.lang.Float;
+import java.net.*;
 
 /**
  *
@@ -19,6 +20,8 @@ import java.lang.Float;
 public class Window extends javax.swing.JFrame {
     
     public RelojHilo relojHilo;
+    public Socket u1, u2, u3, u4;
+    public boolean e1 = false,e2 = false,e3 = false,e4 = false;
 
     /**
      * Creates new form MainWindow
@@ -61,10 +64,10 @@ public class Window extends javax.swing.JFrame {
         BSegReloj3 = new javax.swing.JButton();
         BSegReloj4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        enviar1 = new javax.swing.JButton();
+        enviar2 = new javax.swing.JButton();
+        enviar3 = new javax.swing.JButton();
+        enviar4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -220,13 +223,18 @@ public class Window extends javax.swing.JFrame {
 
         jLabel5.setText("(en segundos)");
 
-        jButton1.setText("Enviar 1");
+        enviar1.setText("Enviar 1");
+        enviar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviar1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Enviar 2");
+        enviar2.setText("Enviar 2");
 
-        jButton3.setText("Enviar 3");
+        enviar3.setText("Enviar 3");
 
-        jButton4.setText("Enviar 4");
+        enviar4.setText("Enviar 4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,17 +269,16 @@ public class Window extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(enviar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(enviar2))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(enviar3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(enviar4)))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(BSegReloj3)
@@ -328,12 +335,12 @@ public class Window extends javax.swing.JFrame {
                             .addComponent(BSegReloj4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(enviar1)
+                            .addComponent(enviar2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))))
+                            .addComponent(enviar3)
+                            .addComponent(enviar4))))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
@@ -513,6 +520,13 @@ public class Window extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TFSegundoActionPerformed
 
+    private void enviar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviar1ActionPerformed
+        System.out.println(this.e1);
+        System.out.println("boton");
+        this.e1 = true;  
+        System.out.println(this.e1);
+    }//GEN-LAST:event_enviar1ActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BReloj1;
@@ -533,10 +547,10 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextField TFHora;
     private javax.swing.JTextField TFMinuto;
     private javax.swing.JTextField TFSegundo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton enviar1;
+    private javax.swing.JButton enviar2;
+    private javax.swing.JButton enviar3;
+    private javax.swing.JButton enviar4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
