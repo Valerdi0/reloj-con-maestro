@@ -14,41 +14,41 @@ import java.io.*;
  */
 public class Servidor {
     final int PUERTO=5000;
+    int maximoConexiones = 4; // Maximo de conexiones simultaneas
     ServerSocket sc;
-    int cont;
+    int cont = 0;
     //SERVIDOR
 
     public void initServer(Window ventana){
         try{
-            sc = new ServerSocket(PUERTO );/* crea socket servidor que escuchara en puerto 5000*/
-            cont = 0;           
+            sc = new ServerSocket(PUERTO, maximoConexiones);/* crea socket servidor que escuchara en puerto 5000*/
+            MensajesChat mensajes = new MensajesChat();
+            
             while(true){
-                Thread t;
                 System.out.println("Esperando una conexión en el puerto:" + PUERTO);
                 Socket esclavo = sc.accept();
                 cont++;
+                System.out.println("Cliente con la IP: " + esclavo.getInetAddress().getHostName() + " conectado.");
                 switch(cont){
                     case 1:
-                        System.out.println("Servidor e1:" + ventana.e1);
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj1, ventana.e1);
+                        ThreadHandle t1 = new ThreadHandle(esclavo, ventana.LabelReloj1, mensajes,ventana.relojHilo.reloj1);
+                        t1.start();
                         break;
                     case 2:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj2, ventana.e2);
+                        ThreadHandle t2 = new ThreadHandle(esclavo, ventana.LabelReloj2, mensajes,ventana.relojHilo.reloj2);
+                        t2.start();
                         break;
                     case 3:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj3, ventana.e3);
+                        ThreadHandle t3 = new ThreadHandle(esclavo, ventana.LabelReloj3, mensajes,ventana.relojHilo.reloj3);
+                        t3.start();
                         break;
                     case 4:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj4,ventana.e4);
-                        break;
-                    default:
-                        t = new ThreadHandle(esclavo, ventana.LabelReloj1,ventana.e1);
+                        ThreadHandle t4 = new ThreadHandle(esclavo, ventana.LabelReloj4, mensajes,ventana.relojHilo.reloj4);
+                        t4.start();
                         break;
                 }
-                t.start();
-                if(cont == 4)
-                    cont = 0;
                 
+                                
             }            
         }catch(Exception e ){
             System.out.println("Error: "+e.getMessage());

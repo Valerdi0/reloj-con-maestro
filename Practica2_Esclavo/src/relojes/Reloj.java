@@ -33,10 +33,10 @@ public class Reloj extends javax.swing.JFrame{
         } catch (IOException ex) {
             System.out.println("No se ha podido conectar con el servidor (" + ex.getMessage() + ").");
         }
-        
+        javax.swing.JTextField nada = new javax.swing.JTextField("");
         // Accion para el boton enviar
-        btnPedir.addActionListener(new ConexionServidor(socket, "Dame hora"));
-        btnMandar.addActionListener(new ConexionServidor(socket, hora.getText() + ":" + minutos.getText()));
+        btnPedir.addActionListener(new ConexionServidor(socket, nada, nada));
+        btnMandar.addActionListener(new ConexionServidor(socket, hora,minutos));
     }
     
     public void recibirMensajesServidor(){
@@ -50,14 +50,14 @@ public class Reloj extends javax.swing.JFrame{
         } catch (NullPointerException ex) {
             System.out.println("El socket no se creo correctamente. ");
         }
-        
+        contador = new RelojHilo(this.Lreloj);
         // Bucle infinito que recibe mensajes del servidor
         boolean conectado = true;
         while (conectado) {
             try {
                 mensaje = entradaDatos.readUTF();
                 System.out.println(mensaje);
-                contador = new RelojHilo(this.Lreloj);
+                
                 String[] numeros;
                 numeros = mensaje.split(":");
                 contador.reloj1.setHora(Integer.parseInt(numeros[0]));
@@ -106,6 +106,11 @@ public class Reloj extends javax.swing.JFrame{
         jLabel2.setText(":");
 
         btnMandar.setText("Cambiar hora");
+        btnMandar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMandarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -128,13 +133,13 @@ public class Reloj extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(btnPedir)
@@ -143,7 +148,7 @@ public class Reloj extends javax.swing.JFrame{
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Lreloj, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Lreloj, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,6 +172,10 @@ public class Reloj extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMandarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMandarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMandarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

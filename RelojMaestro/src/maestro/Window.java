@@ -360,11 +360,6 @@ public class Window extends javax.swing.JFrame {
            	int x=Integer.parseInt(H);
            	int y=Integer.parseInt(M);
        		if((x>=0 && x<=24)&&(y>=0 && y<=59)){  
-		       /*hora1[0]=Integer.parseInt(H);
-		       min1[0]=Integer.parseInt(M);
-		       h1=new Thread(this);
-		       id[0]=h1.getName();
-		       h1.start();*/
                        this.relojHilo.reloj1.setHora(x);
                        this.relojHilo.reloj1.setMinuto(y);
                        this.TFHora.setText("");

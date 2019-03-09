@@ -18,10 +18,13 @@ public class ConexionServidor implements ActionListener {
     private Socket socket; 
     private String mensaje;
     private DataOutputStream salidaDatos;
+    javax.swing.JTextField hora;
+    javax.swing.JTextField minutos;
     
-    public ConexionServidor(Socket socket, String mensaje) {
+    public ConexionServidor(Socket socket, javax.swing.JTextField hora, javax.swing.JTextField minutos) {
         this.socket = socket;
-        this.mensaje = mensaje;
+        this.hora = hora;
+        this.minutos = minutos;
         try {
             this.salidaDatos = new DataOutputStream(this.socket.getOutputStream());
         } catch (IOException ex) {
@@ -34,6 +37,7 @@ public class ConexionServidor implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
+            this.mensaje = hora.getText() + ":" + minutos.getText();
             salidaDatos.writeUTF(mensaje);
             mensaje = "";
         } catch (IOException ex) {
